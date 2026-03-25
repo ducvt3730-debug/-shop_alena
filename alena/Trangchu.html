@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alena - Thời trang và Phụ kiện</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background-color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        /* Header */
+        .top-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .container {
+            width: 1200px;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #d32f2f;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            padding: 10px 15px;
+            width: 400px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #d32f2f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .user-actions a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .hotline {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* Main Navigation với slogan */
+        .main-nav {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            position: relative;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .nav-menu > li {
+            position: relative;
+        }
+        
+        .nav-menu > li > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 0;
+            display: block;
+        }
+        
+        .nav-menu > li > a:hover {
+            color: #d32f2f;
+        }
+        
+        /* Chỉ có mũi tên cho 2 mục có dropdown */
+        .nav-menu > li:nth-child(2) > a::after,
+        .nav-menu > li:nth-child(3) > a::after {
+            content: " ▼";
+            font-size: 10px;
+            color: #888;
+        }
+        
+        /* Khi dropdown active thì đổi thành ▲ */
+        .nav-menu > li:nth-child(2).active > a::after,
+        .nav-menu > li:nth-child(3).active > a::after {
+            content: " ▲";
+        }
+        
+
+        /* Dropdown Menus - Ẩn mặc định */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            min-width: 220px;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            padding: 15px 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        
+        /* Hiện dropdown khi hover */
+        .has-dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* Dropdown cho Thời trang Nam - Kích thước vừa */
+        .fashion-dropdown {
+            width: 400px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .fashion-column {
+            flex: 1;
+        }
+        
+        .dropdown-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d32f2f;
+        }
+        
+        .dropdown-list {
+            list-style: none;
+        }
+        
+        .dropdown-list li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .dropdown-list > li > a {
+            display: block;
+            padding: 8px 0;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .dropdown-list > li > a:hover {
+            color: #d32f2f;
+            padding-left: 5px;
+        }
+        
+        /* Mũi tên cho mục có submenu */
+        .dropdown-list li.has-submenu > a::after {
+            content: " ▶";
+            font-size: 10px;
+            float: right;
+            color: #888;
+        }
+        
+        /* Submenu - Ẩn mặc định */
+        .submenu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            min-width: 160px;
+            z-index: 1001;
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        
+        /* Hiện submenu khi hover */
+        .has-submenu:hover .submenu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        
+        .submenu a {
+            display: block;
+            padding: 6px 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        .submenu a:hover {
+            background-color: #f9f9f9;
+            color: #d32f2f;
+            padding-left: 20px;
+        }
+        
+        /* Dropdown cho Sản phẩm - Kích thước vừa */
+        .product-dropdown {
+            width: 600px;
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+        }
+        
+        .product-column {
+            flex: 1;
+        }
+        
+        .product-category {
+            margin-bottom: 25px;
+        }
+        
+        .category-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #d32f2f;
+        }
+        
+        .category-items {
+            list-style: none;
+        }
+        
+        .category-items li {
+            margin-bottom: 8px;
+        }
+        
+        .category-items a {
+            display: block;
+            padding: 6px 0;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .category-items a:hover {
+            color: #d32f2f;
+        }
+        
+        /* Main Banner Slideshow */
+        .main-banner {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        
+        .banner-click-area {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 10;
+        }
+        
+        .banner-click-left {
+            left: 0;
+        }
+        
+        .banner-click-right {
+            right: 0;
+        }
+        
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .banner-slide.active {
+            opacity: 1;
+        }
+        
+        .banner-slide:nth-child(1) {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #ff6b9d;
+        }
+        
+        .banner-slide:nth-child(2) {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #4ecdc4;
+        }
+        
+        .banner-slide:nth-child(3) {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #45b7d1;
+        }
+        
+        .banner-slide:nth-child(4) {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #f9ca24;
+        }
+        
+        .banner-slide:nth-child(5) {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #6c5ce7;
+        }
+        
+        /* Banner Dots Navigation */
+        .banner-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .banner-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .banner-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        .banner-dot:hover {
+            background: rgba(255,255,255,0.8);
+        }
+        
+        /* Promo Section - 4 cột với FREE */
+        .promo-section {
+            background-color: #fff;
+            padding: 30px 0;
+        }
+        
+        .promo-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .promo-item {
+            text-align: center;
+            padding: 25px 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            position: relative;
+        }
+        
+        .promo-item:first-child {
+            background-color: #fff8f8;
+            border: 2px solid #d32f2f;
+        }
+        
+        .promo-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin-bottom: 5px;
+        }
+        
+        .promo-item:first-child .promo-title {
+            font-size: 20px;
+        }
+        
+        .promo-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .free-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #d32f2f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin: 40px 0 30px;
+            color: #000;
+        }
+        
+        /* Products Section Layout */
+        .products-section {
+            margin-bottom: 50px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .product-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 220px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        /* Đây là chỗ để chèn ảnh sản phẩm */
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5f5 25%, #e8e8e8 25%, #e8e8e8 50%, #f5f5f5 50%, #f5f5f5 75%, #e8e8e8 75%, #e8e8e8);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .product-image span {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #d32f2f;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .current-price {
+            font-weight: bold;
+            font-size: 18px;
+            color: #d32f2f;
+        }
+        
+        .old-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .contact-price {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #d32f2f;
+        }
+        
+        /* View all button */
+        .view-all {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .view-all-btn {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .view-all-btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        /* Sale Banner */
+        .sale-banner {
+            background-color: #d32f2f;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .sale-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .sale-subtitle {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .sale-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .sale-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: white;
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        
+        /* Product Categories */
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-item {
+            padding: 10px 25px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        .category-item.active {
+            background-color: #d32f2f;
+            color: white;
+            border-color: #d32f2f;
+        }
+        
+        /* News Section */
+        .news-section {
+            margin: 50px 0;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .news-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .news-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .news-meta i {
+            margin-right: 8px;
+            color: #d32f2f;
+        }
+        
+        .news-author {
+            margin-right: 20px;
+        }
+        
+        .news-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Brands Section */
+        .brands-section {
+            background-color: #f9f9f9;
+            padding: 40px 0;
+            margin: 50px 0;
+        }
+        
+        .brands-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .brand-logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #333;
+            padding: 15px 25px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .newsletter-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .newsletter-desc {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 15px;
+        }
+        
+        .newsletter-btn {
+            padding: 0 30px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .footer-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .footer-subtitle {
+            font-size: 16px;
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #d32f2f;
+            width: 16px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: #d32f2f;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .user-actions {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .promo-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                display: none;
+            }
+            
+            .fashion-dropdown {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .product-dropdown {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .submenu {
+                position: static;
+                box-shadow: none;
+                border: none;
+                display: none;
+                padding-left: 20px;
+            }
+        }
+        
+        
+        @media (max-width: 768px) {
+            .promo-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="Trangchu.html" class="logo">AL<span>ENA</span></a>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm sản phẩm bạn mong muốn">
+                </div>
+                <div class="user-actions">
+                    <a href="login.html">Đăng nhập</a> / <a href="register.html">Đăng ký</a>
+                    <a href="admin.html">Admin</a> / <a href="user.html">User</a>
+                    <a href="cart.html" class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hotline"><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation với menu ẩn phân cấp -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li><a href="Trangchu.html">Trang chủ</a></li>
+
+                <!-- Thời trang Nam với dropdown -->
+                <li class="has-dropdown">
+                    <a href="chitietsp.html">Thời trang Nam</a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-title">Thời trang Nam</div>
+                        <ul class="dropdown-list">
+                            <li class="has-submenu">
+                                <a href="chitietsp.html">Sơ mi nam</a>
+                                <div class="submenu">
+                                    <a href="chitietsp.html">Sơ mi ngắn tay</a>
+                                    <a href="chitietsp.html">Sơ mi dài tay</a>
+                                </div>
+                            </li>
+                            <li><a href="chitietsp.html">Quần âu nam</a></li>
+                            <li><a href="chitietsp.html">Quần short nam</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Sản phẩm với dropdown -->
+                <li class="has-dropdown">
+                    <a href="chitietsp.html">Sản phẩm</a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-title">Sản phẩm</div>
+                        <ul class="dropdown-list">
+                            <li class="has-submenu">
+                                <a href="chitietsp.html">Sản phẩm nổi bật</a>
+                                <div class="submenu">
+                                    <a href="chitietsp.html">Quần áo</a>
+                                    <a href="chitietsp.html">Phụ kiện</a>
+                                    <a href="chitietsp.html">Giầy dép</a>
+                                </div>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="chitietsp.html">Sản phẩm hot trend</a>
+                                <div class="submenu">
+                                    <a href="chitietsp.html">Áo thun</a>
+                                    <a href="chitietsp.html">Quần jeans</a>
+                                    <a href="chitietsp.html">Áo khoác</a>
+                                    <a href="chitietsp.html">Túi xách</a>
+                                </div>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="chitietsp.html">Sản phẩm khuyến mãi</a>
+                                <div class="submenu">
+                                    <a href="chitietsp.html">Giày thể thao</a>
+                                    <a href="chitietsp.html">Giày tây</a>
+                                    <a href="chitietsp.html">Dép nam</a>
+                                    <a href="chitietsp.html">Sale 50%</a>
+                                </div>
+                            </li>
+                            <li><a href="chitietsp.html">Bé gái</a></li>
+                            <li><a href="chitietsp.html">Bé trai</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li><a href="chitietsp.html">Bé trai</a></li>
+                <li><a href="chitietsp.html">Bé gái</a></li>
+                <li><a href="newsletter.html">Tin tức</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Banner Slideshow -->
+    <section class="main-banner">
+        <div class="banner-slide active"> Bộ sưu tập mùa xuân</div>
+        <div class="banner-slide"> Phong cách hiện đại</div>
+        <div class="banner-slide"> Xu hướng mới nhất</div>
+        <div class="banner-slide"> Thời trang công sở</div>
+        <div class="banner-slide"> Phụ kiện thời trang</div>
+        <div class="banner-click-area banner-click-left"></div>
+        <div class="banner-click-area banner-click-right"></div>
+        <div class="banner-dots">
+            <div class="banner-dot active" data-slide="0"></div>
+            <div class="banner-dot" data-slide="1"></div>
+            <div class="banner-dot" data-slide="2"></div>
+            <div class="banner-dot" data-slide="3"></div>
+            <div class="banner-dot" data-slide="4"></div>
+        </div>
+    </section>
+
+    <!-- Promo Section - 4 cột với FREE -->
+    <section class="promo-section">
+        <div class="container">
+            <div class="promo-container">
+                <div class="promo-item">
+                    <div class="promo-title">MUA 2 SẢN PHẨM TĂNG 20%</div>
+                    <div class="promo-desc">Từ 10 - 16/12</div>
+                </div>
+                <div class="promo-item">
+                    <div class="free-badge">FREE</div>
+                    <div class="promo-title">MIỄN PHÍ GIAO HÀNG</div>
+                    <div class="promo-desc">Miễn phí ship với đơn hàng > 498K</div>
+                </div>
+                <div class="promo-item">
+                    <div class="promo-title">THANH TOÁN COD</div>
+                    <div class="promo-desc">Thanh toán khi nhận hàng (COD)</div>
+                </div>
+                <div class="promo-item">
+                    <div class="promo-title">HỖ TRỢ BẢO HÀNH</div>
+                    <div class="promo-desc">Đổi, sửa đổi tại tất cả store</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SẢN PHẨM HOT -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">SẢN PHẨM HOT</h2>
+            
+            <div class="product-categories">
+                <div class="category-item active">Quần áo</div>
+                <div class="category-item">Phụ kiện</div>
+                <div class="category-item">Giầy dép</div>
+                <div class="category-item">Bé gái</div>
+                <div class="category-item">Bé trai</div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Sản phẩm 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh giày cao gót tại đây
+                        </div>
+                        <span>-50.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Giày cao gót</div>
+                        <div class="product-price">
+                            <span class="current-price">150.000₫</span>
+                            <span class="old-price">200.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh giày converse tại đây
+                        </div>
+                        <span>-250.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Giày converse nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">100.000₫</span>
+                            <span class="old-price">350.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh giày nữ tại đây
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Giày nữ</div>
+                        <div class="product-price">
+                            <span class="contact-price">Liên hệ</span>
+                        </div>
+                        <button class="add-to-cart">Liên hệ đặt hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh giày da trẻ em tại đây
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Giày da trẻ em</div>
+                        <div class="product-price">
+                            <span class="contact-price">Liên hệ</span>
+                        </div>
+                        <button class="add-to-cart">Liên hệ đặt hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh giày búp bê trẻ em tại đây
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Giày búp bê trẻ em</div>
+                        <div class="product-price">
+                            <span class="contact-price">Liên hệ</span>
+                        </div>
+                        <button class="add-to-cart">Liên hệ đặt hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh sản phẩm tại đây
+                        </div>
+                        <span>-20.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Sản phẩm bán chạy</div>
+                        <div class="product-price">
+                            <span class="current-price">180.000₫</span>
+                            <span class="old-price">200.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all">
+                <a href="chitietsp.html" class="view-all-btn">Xem tất cả</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- HÀNG MỚI VỀ -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">HÀNG MỚI VỀ</h2>
+            
+            <div class="product-categories">
+                <div class="category-item active">Quần áo</div>
+                <div class="category-item">Phụ kiện</div>
+                <div class="category-item">Giầy dép</div>
+                <div class="category-item">Bé gái</div>
+                <div class="category-item">Bé trai</div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Sản phẩm 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh áo len nữ tại đây
+                        </div>
+                        <span>+30.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo len nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">110.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh chân váy nữ tại đây
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Chân váy nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">70.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh áo khoác nữ tại đây
+                        </div>
+                        <span>+50.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo khoác nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">300.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SALE BANNER -->
+    <section class="sale-banner">
+        <div class="container">
+            <h2 class="sale-title">SALE ĐỒNG GIÁ - ĐỪNG LO VỀ GIÁ</h2>
+            <h3 class="sale-subtitle">MINI COLLECTION - "LẠC QUAN" MANG VẺ ĐẸP ĐẾN CHO BẠN</h3>
+            <p class="sale-text">"Tặng nhau tích cực - Ship kèm niềm vui"</p>
+            <a href="chitietsp.html" class="sale-btn">MUA NGAY KẺO LỠ</a>
+        </div>
+    </section>
+
+    <!-- SẢN PHẨM GIÁ TỐT -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">SẢN PHẨM GIÁ TỐT</h2>
+            
+            <div class="product-categories">
+                <div class="category-item active">Quần áo</div>
+                <div class="category-item">Phụ kiện</div>
+                <div class="category-item">Giầy dép</div>
+                <div class="category-item">Bé gái</div>
+                <div class="category-item">Bé trai</div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Sản phẩm 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh áo len nữ tại đây
+                        </div>
+                        <span>-20.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo len nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">110.000₫</span>
+                            <span class="old-price">130.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh chân váy nữ tại đây
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Chân váy nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">70.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+                
+                <!-- Sản phẩm 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- CHỖ ĐỂ CHÈN ẢNH SẢN PHẨM -->
+                        <div class="product-image-placeholder">
+                            Chèn ảnh áo khoác nữ tại đây
+                        </div>
+                        <span>-200.000₫</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Áo khoác nữ</div>
+                        <div class="product-price">
+                            <span class="current-price">300.000₫</span>
+                            <span class="old-price">500.000₫</span>
+                        </div>
+                        <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all">
+                <a href="#" class="view-all-btn">Xem tất cả</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIN TỨC THỜI TRANG -->
+    <section class="news-section">
+        <div class="container">
+            <h2 class="section-title">TIN TỨC THỜI TRANG</h2>
+            
+            <div class="news-grid">
+                <!-- Tin tức 1 -->
+                <div class="news-card">
+                    <div class="news-content">
+                        <h3 class="news-title">Cách phối đồ hè nam</h3>
+                        <div class="news-meta">
+                            <span class="news-author"><i class="fas fa-user"></i> Cafein Team</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> Ngày 27/05/2022</span>
+                        </div>
+                        <p class="news-desc">1. Sơ mi hoa tiết + quần denim + giày sneaker. Hãy tranh thủ những ngày hè để diện ngay chiếc áo sơ mi hoa tiết cá tính kết hợp cùng quần jeans và giày sneaker năng động...</p>
+                        <a href="newsletter.html" class="read-more">Xem thêm →</a>
+                    </div>
+                </div>
+                
+                <!-- Tin tức 2 -->
+                <div class="news-card">
+                    <div class="news-content">
+                        <h3 class="news-title">Cách phối đồ với quần thể thao nam</h3>
+                        <div class="news-meta">
+                            <span class="news-author"><i class="fas fa-user"></i> Cafein Team</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> Ngày 27/05/2022</span>
+                        </div>
+                        <p class="news-desc">1. Quần jogger thể thao phối với áo khoác da. Nếu bạn nghĩ rằng áo khoác da chỉ có thể kết hợp với quần jeans thì bạn đã nhầm. Sự kết hợp giữa áo khoác da và quần jogger...</p>
+                        <a href="newsletter.html" class="read-more">Xem thêm →</a>
+                    </div>
+                </div>
+                
+                <!-- Tin tức 3 -->
+                <div class="news-card">
+                    <div class="news-content">
+                        <h3 class="news-title">Cách phối đồ sơ mi nam</h3>
+                        <div class="news-meta">
+                            <span class="news-author"><i class="fas fa-user"></i> Cafein Team</span>
+                            <span class="news-date"><i class="far fa-calendar-alt"></i> Ngày 27/05/2022</span>
+                        </div>
+                        <p class="news-desc">1. Quần jean ống đứng. Cách phối đồ với áo sơ mi nam đầu tiên mà chúng tôi gợi ý cho các bạn là mix áo sơ mi với quần jean ống đứng - item kinh điển không bao giờ lỗi mốt...</p>
+                        <a href="newsletter.html" class="read-more">Xem thêm →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRANDS SECTION -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="brands-container">
+                <div class="brand-logo">CHANEL</div>
+                <div class="brand-logo">LOUIS VUITTON</div>
+                <div class="brand-logo">GIVENCHY</div>
+                <div class="brand-logo">BALENCIAGA PARIS</div>
+                <div class="brand-logo">HERMÈS PARIS</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="newsletter-title">NHẬP THÔNG TIN KHUYẾN MÃI TỪ CHÚNG TÔI</h2>
+            <p class="newsletter-desc">Đăng ký ngay để nhận thông tin khuyến mãi mới nhất và ưu đãi đặc biệt từ Alena Fashion</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Nhập email của bạn">
+                <button type="submit" class="newsletter-btn">ĐĂNG KÝ</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-title">Alena</div>
+                    <div class="footer-subtitle">Shop Thời trang và phụ kiện Alena</div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, TP Hà Nội</p>
+                        <p><i class="far fa-clock"></i> Giờ làm việc: Từ 9:00 đến 22:00 các ngày trong tuần từ Thứ 2 đến Chủ nhật</p>
+                        <p><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="footer-title">Về chúng tôi</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Hỗ trợ khách hàng</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Dịch vụ</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Alena Fashion. Tất cả các quyền được bảo lưu.</p>
+                <p style="margin-top: 10px;">Website: https://template-alena.net/#</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Banner slideshow tự động
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.banner-slide');
+        const totalSlides = slides.length;
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateDots();
+        }
+        
+        function prevSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateDots();
+        }
+        
+        // Xử lý click dots điều hướng
+        document.querySelectorAll('.banner-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                slides[currentSlide].classList.remove('active');
+                document.querySelectorAll('.banner-dot')[currentSlide].classList.remove('active');
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+                document.querySelectorAll('.banner-dot')[currentSlide].classList.add('active');
+            });
+        });
+        
+        // Xử lý click 2 bên banner
+        document.querySelector('.banner-click-left').addEventListener('click', prevSlide);
+        document.querySelector('.banner-click-right').addEventListener('click', nextSlide);
+        
+        // Cập nhật dots khi chuyển slide tự động
+        function updateDots() {
+            document.querySelectorAll('.banner-dot').forEach(dot => dot.classList.remove('active'));
+            document.querySelectorAll('.banner-dot')[currentSlide].classList.add('active');
+        }
+        
+        // Tự động chuyển slide mỗi 5 giây
+        setInterval(nextSlide, 5000);
+        
+        // Xử lý chuyển đổi danh mục sản phẩm
+        document.querySelectorAll('.product-categories .category-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.product-categories .category-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Xử lý thêm vào giỏ hàng
+        let cartCount = 0;
+        const cartCountElement = document.getElementById('cartCount');
+        
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                const productPrice = this.closest('.product-card').querySelector('.current-price')?.textContent 
+                    || this.closest('.product-card').querySelector('.contact-price')?.textContent;
+                
+                let message = `Đã thêm "${productName}"`;
+                if (productPrice && productPrice !== "Liên hệ") {
+                    message += ` với giá ${productPrice} vào giỏ hàng!`;
+                    cartCount++;
+                    cartCountElement.textContent = cartCount;
+                } else {
+                    message += ` vào danh sách yêu thích!`;
+                }
+                
+                alert(message);
+                
+                // Hiệu ứng thay đổi nút
+                if (productPrice && productPrice !== "Liên hệ") {
+                    this.textContent = "Đã thêm";
+                    this.style.backgroundColor = "#27ae60";
+                    
+                    setTimeout(() => {
+                        this.textContent = "Thêm vào giỏ hàng";
+                        this.style.backgroundColor = "#333";
+                    }, 2000);
+                } else {
+                    this.textContent = "Đã ghi nhận";
+                    this.style.backgroundColor = "#ff9900";
+                    
+                    setTimeout(() => {
+                        this.textContent = "Liên hệ đặt hàng";
+                        this.style.backgroundColor = "#333";
+                    }, 2000);
+                }
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Xử lý dropdown menu cho mobile
+        document.querySelectorAll('.has-dropdown > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Kiểm tra nếu đang ở mobile (dropdown bị ẩn)
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement.querySelector('.dropdown-menu');
+                    const isActive = this.parentElement.classList.contains('active');
+
+                    // Đóng tất cả dropdown khác
+                    document.querySelectorAll('.has-dropdown').forEach(item => {
+                        item.classList.remove('active');
+                        item.querySelector('.dropdown-menu').style.display = 'none';
+                    });
+
+                    // Toggle dropdown hiện tại
+                    if (!isActive) {
+                        this.parentElement.classList.add('active');
+                        dropdown.style.display = 'block';
+                    } else {
+                        this.parentElement.classList.remove('active');
+                        dropdown.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Đóng dropdown khi click bên ngoài
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.has-dropdown') && window.innerWidth <= 992) {
+                document.querySelectorAll('.has-dropdown').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.dropdown-menu').style.display = 'none';
+                });
+            }
+        });
+
+        // Xử lý đăng ký newsletter
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+
+            if (email) {
+                alert(`Cảm ơn bạn đã đăng ký nhận khuyến mãi với email: ${email}`);
+                this.querySelector('.newsletter-input').value = '';
+            } else {
+                alert('Vui lòng nhập email của bạn!');
+            }
+        });
+    </script>
+</body>
+</html>

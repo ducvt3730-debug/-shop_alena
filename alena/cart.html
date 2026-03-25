@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - Alena Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background-color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        /* Header */
+        .top-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .container {
+            width: 1200px;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #d32f2f;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            padding: 10px 15px;
+            width: 400px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .cart-icon:hover {
+            color: #d32f2f;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #d32f2f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .user-actions a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .hotline {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* Main Navigation */
+        .main-nav {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            position: relative;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .nav-menu > li > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 0;
+            display: block;
+        }
+        
+        .nav-menu > li > a:hover {
+            color: #d32f2f;
+        }
+        
+        /* Cart Page Styles */
+        .cart-section {
+            padding: 50px 0;
+            min-height: 60vh;
+        }
+        
+        .cart-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        
+        .cart-content {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .cart-empty {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .continue-shopping {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #d32f2f;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        /* Cart Items */
+        .cart-items {
+            margin-bottom: 30px;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .item-info {
+            flex: 1;
+            margin-left: 20px;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .item-price {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .quantity-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .remove-item {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .remove-item:hover {
+            background: #c82333;
+        }
+        
+        .cart-total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #d32f2f;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .newsletter-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .newsletter-desc {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 15px;
+        }
+        
+        .newsletter-btn {
+            padding: 0 30px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .footer-subtitle {
+            font-size: 16px;
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #d32f2f;
+            width: 16px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: #d32f2f;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .user-actions {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                padding: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="Trangchu.html" class="logo">AL<span>ENA</span></a>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm sản phẩm bạn mong muốn">
+                </div>
+                <div class="user-actions">
+                    <a href="login.html">Đăng nhập</a> / <a href="register.html">Đăng ký</a>
+                    <a href="cart.html" class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hotline"><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li><a href="Trangchu.html">Trang chủ</a></li>
+                <li><a href="#">Thời trang Nam</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Bé trai</a></li>
+                <li><a href="#">Bé gái</a></li>
+                <li><a href="newsletter.html">Tin tức</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <h1 class="cart-title">GIỎ HÀNG CỦA BẠN</h1>
+            <div class="cart-content">
+                <div class="cart-items" id="cartItems"></div>
+                <div class="cart-empty" id="cartEmpty" style="display: none;">
+                    <i class="fas fa-shopping-cart" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+                    <p>Giỏ hàng của bạn đang trống</p>
+                </div>
+                <div class="cart-total" id="cartTotal"></div>
+                <div class="cart-actions">
+                    <a href="Trangchu.html" class="continue-shopping">Tiếp tục mua sắm</a>
+                    <a href="thanhtoan.html" class="checkout-btn">Thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="newsletter-title">NHẬP THÔNG TIN KHUYẾN MÃI TỪ CHÚNG TÔI</h2>
+            <p class="newsletter-desc">Đăng ký ngay để nhận thông tin khuyến mãi mới nhất và ưu đãi đặc biệt từ Alena Fashion</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Nhập email của bạn">
+                <button type="submit" class="newsletter-btn">ĐĂNG KÝ</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-title">Alena</div>
+                    <div class="footer-subtitle">Shop Thời trang và phụ kiện Alena</div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, TP Hà Nội</p>
+                        <p><i class="far fa-clock"></i> Giờ làm việc: Từ 9:00 đến 22:00 các ngày trong tuần từ Thứ 2 đến Chủ nhật</p>
+                        <p><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="footer-title">Về chúng tôi</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Hỗ trợ khách hàng</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Dịch vụ</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Alena Fashion. Tất cả các quyền được bảo lưu.</p>
+                <p style="margin-top: 10px;">Website: https://template-alena.net/#</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lấy giỏ hàng từ localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById('cartCount');
+        const cartItemsElement = document.getElementById('cartItems');
+        const cartEmptyElement = document.getElementById('cartEmpty');
+        const cartTotalElement = document.getElementById('cartTotal');
+        
+        function updateCartDisplay() {
+            cartCountElement.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartItemsElement.style.display = 'none';
+                cartEmptyElement.style.display = 'block';
+                cartTotalElement.style.display = 'none';
+            } else {
+                cartItemsElement.style.display = 'block';
+                cartEmptyElement.style.display = 'none';
+                cartTotalElement.style.display = 'block';
+                
+                // Hiển thị sản phẩm
+                cartItemsElement.innerHTML = '';
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    const price = parseFloat(item.price.replace(/[^\d]/g, ''));
+                    const itemTotal = price * item.quantity;
+                    total += itemTotal;
+                    
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-price">${item.price} x ${item.quantity} = ${itemTotal.toLocaleString()}₫</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="decreaseQuantity(${index})">−</button>
+                                <span class="quantity-display">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item" onclick="removeItem(${index})">
+                            <i class="fas fa-trash"></i> Xóa
+                        </button>
+                    `;
+                    cartItemsElement.appendChild(itemElement);
+                });
+                
+                cartTotalElement.innerHTML = `Tổng cộng: ${total.toLocaleString()}₫`;
+            }
+        }
+        
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        function increaseQuantity(index) {
+            cart[index].quantity += 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        function decreaseQuantity(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            }
+        }
+        
+        // Cập nhật hiển thị khi load trang
+        updateCartDisplay();
+        
+        // Xử lý đăng ký newsletter
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            
+            if (email) {
+                alert(`Cảm ơn bạn đã đăng ký nhận khuyến mãi với email: ${email}`);
+                this.querySelector('.newsletter-input').value = '';
+            } else {
+                alert('Vui lòng nhập email của bạn!');
+            }
+        });
+    </script>
+</body>
+</html>

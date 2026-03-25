@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Công ty TNHH Thời trang Alena</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* Header */
+        .header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            color: #d32f2f;
+        }
+        
+        /* Main content */
+        .contact-content {
+            padding: 30px 0;
+        }
+        
+        /* Company info */
+        .company-info {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .company-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-item strong {
+            min-width: 100px;
+            color: #333;
+        }
+        
+        .contact-item p {
+            color: #555;
+        }
+        
+        /* Map section */
+        .map-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .map-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .map-placeholder i {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #d32f2f;
+        }
+        
+        .map-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .map-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Contact form */
+        .contact-form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .required::after {
+            content: "*";
+            color: #d32f2f;
+            margin-left: 3px;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #888;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b71c1c;
+        }
+        
+        /* Partners section */
+        .partners-section {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .partners-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .partners-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .partner-item {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+        
+        .partner-item p {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .partner-item .location {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Layout */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 992px) {
+            .contact-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            display: block;
+            animation: fadeInOut 3s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+        
+        /* Map icon font */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+    </style>
+</head>
+<body>
+    <!-- Header với breadcrumb -->
+    <header class="header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="Trangchu.html">Trang chủ</a> > <span>Liên hệ</span>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="contact-content">
+            <div class="contact-layout">
+                <!-- Left column - Company info & Map -->
+                <div>
+                    <div class="company-info">
+                        <h2 class="company-title">CÔNG TY TNHH THỜI TRANG ALENA</h2>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <strong>Địa chỉ:</strong>
+                                <p>Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, TP Hà Nội</p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <strong>Email:</strong>
+                                <p>support@sapo.vn</p>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <strong>Hotline:</strong>
+                                <p>1900 6750</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map section -->
+                    <div class="map-section">
+                        <h3 class="map-title">Bản đồ chỉ đường</h3>
+                        <div class="map-container">
+                            <!-- Embedded Google Maps -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863981044343!2d105.81666031540274!3d21.036766785993215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab0b5b5b5b5b%3A0x5b5b5b5b5b5b5b5b!2zVOG6oW8gNiwgVMO0YSBuaMOgIExhZGVjbywgMjY2IMSQ4buLbmggQ-G6p24sIFBoxrDhu51uZyBMaeG7h3UgR2lhaSwgUXXhu5FjIELDoCDEkMO0bmgsIEhvw6AgTmjDoCBOaW5o!5e0!3m2!1svi!2s!4v1629876543210!5m2!1svi!2s" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/place/T%E1%BA%A7ng+6,+T%C3%B2a+nh%C3%A0+Ladeco,+266+%C4%90%E1%BB%99i+C%E1%BA%A5n,+Ph%C6%B0%E1%BB%9Dng+Li%E1%BB%85u+Giai,+Qu%E1%BA%ADn+Ba+%C4%90%C3%ACnh,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0367668,105.8166603,17z/data=!3m1!4b1!4m6!3m5!1s0x3135ab0b5b5b5b5b:0x5b5b5b5b5b5b5b5b!8m2!3d21.0367668!4d105.8192352!16s%2Fg%2F11c5c5c5c5?entry=ttu" 
+                           class="map-link" 
+                           target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Xem bản đồ lớn hơn trên Google Maps
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right column - Contact form -->
+                <div>
+                    <div class="contact-form-container">
+                        <h2 class="form-title">LIÊN HỆ VỚI CHÚNG TÔI</h2>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label class="form-label">Họ và tên</label>
+                                <input type="text" class="form-input" id="fullName" placeholder="Họ và tên">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" id="email" placeholder="Email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label required">Điện thoại</label>
+                                <input type="tel" class="form-input" id="phone" placeholder="Điện thoại*" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Nội dung</label>
+                                <textarea class="form-textarea" id="content" placeholder="Nội dung"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Gửi thông tin</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Partners section -->
+            <div class="partners-section">
+                <h3 class="partners-title">Phần mềm quản lý bán hàng - Sapo POS</h3>
+                
+                <div class="partners-grid">
+                    <div class="partner-item">
+                        <p>P. Kim Mã Thượng</p>
+                        <p class="location">Home6</p>
+                        <p class="location">Địa Cần</p>
+                    </div>
+                    
+                    <div class="partner-item">
+                        <p>Phần mềm quản lý bán hàng - Sapo POS</p>
+                    </div>
+                    
+                    <div class="partner-item">
+                        <p>Mii - Made in Italy</p>
+                        <p class="location">Thời Trang Hàng Hiệu...</p>
+                    </div>
+                    
+                    <div class="partner-item">
+                        <p>P. Vạn Phúc</p>
+                        <p class="location">Google</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Phím tắt</a>
+                <a href="#">Dữ liệu bán đô</a>
+                <a href="#">2026</a>
+                <a href="#">Điều khoản</a>
+                <a href="#">Báo cáo một lỗi bán đô</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Công ty TNHH Thời trang Alena</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Thông tin đã được gửi thành công!
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const notification = document.getElementById('notification');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const phone = document.getElementById('phone').value;
+                
+                // Validate required field
+                if (!phone.trim()) {
+                    alert('Vui lòng nhập số điện thoại!');
+                    return;
+                }
+                
+                // Validate phone format
+                const phoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+                if (!phoneRegex.test(phone)) {
+                    alert('Vui lòng nhập số điện thoại hợp lệ (10 số, bắt đầu bằng 03, 05, 07, 08, 09)');
+                    return;
+                }
+                
+                // Show notification
+                notification.textContent = 'Thông tin đã được gửi thành công!';
+                notification.classList.add('show');
+                
+                // Hide notification after 3 seconds
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 3000);
+                
+                // In a real application, you would send data to server here
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: phone,
+                    content: document.getElementById('content').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('Form submitted:', formData);
+                
+                // Reset form
+                contactForm.reset();
+            });
+            
+            // Fill with sample data for demo
+            document.getElementById('fullName').value = "Nguyễn Văn A";
+            document.getElementById('email').value = "nguyenvana@example.com";
+            document.getElementById('phone').value = "0912345678";
+            document.getElementById('content').value = "Tôi muốn tìm hiểu về sản phẩm của công ty.";
+            
+            // Function to open map in new tab
+            function openMap() {
+                const address = "Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, TP Hà Nội";
+                const encodedAddress = encodeURIComponent(address);
+                const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+                window.open(mapUrl, '_blank');
+            }
+            
+            // Add click event to map container
+            const mapContainer = document.querySelector('.map-container');
+            mapContainer.addEventListener('click', openMap);
+            
+            // Add cursor pointer to map container
+            mapContainer.style.cursor = 'pointer';
+            
+            // Add hover effect to map container
+            mapContainer.addEventListener('mouseover', function() {
+                this.style.opacity = '0.9';
+            });
+            
+            mapContainer.addEventListener('mouseout', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>

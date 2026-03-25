@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức thời trang - Alena Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background-color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        /* Header */
+        .top-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .container {
+            width: 1200px;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #d32f2f;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            padding: 10px 15px;
+            width: 400px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .cart-icon:hover {
+            color: #d32f2f;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #d32f2f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .user-actions a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .hotline {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* Main Navigation */
+        .main-nav {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            position: relative;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .nav-menu > li {
+            position: relative;
+        }
+        
+        .nav-menu > li > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 0;
+            display: block;
+        }
+        
+        .nav-menu > li > a:hover {
+            color: #d32f2f;
+        }
+        
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            flex: 0 0 250px;
+        }
+        
+        .sidebar-box {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-title {
+            background-color: #f8f8f8;
+            padding: 12px 15px;
+            font-weight: bold;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+        }
+        
+        .sidebar-list {
+            list-style: none;
+        }
+        
+        .sidebar-list li {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .sidebar-list a {
+            display: block;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-list a:hover {
+            background-color: #f8f8f8;
+            color: #d32f2f;
+        }
+        
+        /* Content */
+        .content {
+            flex: 1;
+        }
+        
+        /* Featured News */
+        .featured-news {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .view-all {
+            color: #d32f2f;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .view-all i {
+            margin-left: 5px;
+        }
+        
+        .featured-list {
+            list-style: none;
+            padding: 15px;
+        }
+        
+        .featured-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .featured-item:last-child {
+            border-bottom: none;
+        }
+        
+        .featured-content {
+            flex: 1;
+        }
+        
+        .featured-content a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.4;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .featured-content a:hover {
+            color: #d32f2f;
+        }
+        
+        .featured-meta {
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .featured-meta i {
+            color: #d32f2f;
+        }
+        
+        .featured-views {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .item-number {
+            background-color: #d32f2f;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        /* Articles */
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .article-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+        }
+        
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .article-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .article-text {
+            flex: 1;
+        }
+        
+        .article-text p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+        }
+        
+        .article-image {
+            flex: 0 0 200px;
+            height: 150px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .newsletter-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .newsletter-desc {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 15px;
+        }
+        
+        .newsletter-btn {
+            padding: 0 30px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .footer-subtitle {
+            font-size: 16px;
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #d32f2f;
+            width: 16px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: #d32f2f;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .user-actions {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: none;
+                width: 100%;
+            }
+            
+            .article-content {
+                flex-direction: column;
+            }
+            
+            .article-image {
+                flex: none;
+                width: 100%;
+                height: 200px;
+                order: -1;
+                margin-bottom: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                padding: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="Trangchu.html" class="logo">AL<span>ENA</span></a>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm sản phẩm bạn mong muốn">
+                </div>
+                <div class="user-actions">
+                    <a href="login.html">Đăng nhập</a> / <a href="register.html">Đăng ký</a>
+                    <a href="cart.html" class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hotline"><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li><a href="Trangchu.html">Trang chủ</a></li>
+                <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                <li><a href="chitietsp.html">Sản phẩm</a></li>
+                <li><a href="chitietsp.html">Bé trai</a></li>
+                <li><a href="chitietsp.html">Bé gái</a></li>
+                <li><a href="newsletter.html">Tin tức</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-box">
+                    <div class="sidebar-title">DANH MỤC TIN TỨC</div>
+                    <ul class="sidebar-list">
+                        <li><a href="newsletter.html">Tin tức thời trang</a></li>
+                        <li><a href="newsletter.html">Mẹo vặt hay</a></li>
+                        <li><a href="newsletter.html">Sao mặc đẹp</a></li>
+                        <li><a href="contact.html">Tư vấn - Hỏi đáp</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Tin tức nổi bật -->
+                <section class="featured-news">
+                    <div class="section-header">
+                        <div class="section-title">TIN TỨC NỔI BẬT</div>
+                        <a href="#" class="view-all">Xem thêm <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <ul class="featured-list">
+                        <li class="featured-item">
+                            <div class="item-number">1</div>
+                            <div class="featured-content">
+                                <a href="#">Cách Phối Đồ Hè Nam Thời Trang 2024</a>
+                                <div class="featured-meta">
+                                    <i class="far fa-calendar-alt"></i> 15/12/2023
+                                    <span class="featured-views"><i class="fas fa-eye"></i> 1.2K</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="featured-item">
+                            <div class="item-number">2</div>
+                            <div class="featured-content">
+                                <a href="#">Xu Hướng Thời Trang Nam Mùa Hè</a>
+                                <div class="featured-meta">
+                                    <i class="far fa-calendar-alt"></i> 12/12/2023
+                                    <span class="featured-views"><i class="fas fa-eye"></i> 980</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="featured-item">
+                            <div class="item-number">3</div>
+                            <div class="featured-content">
+                                <a href="#">Bí Quyết Chọn Trang Phục Phù Hợp</a>
+                                <div class="featured-meta">
+                                    <i class="far fa-calendar-alt"></i> 10/12/2023
+                                    <span class="featured-views"><i class="fas fa-eye"></i> 756</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="featured-item">
+                            <div class="item-number">4</div>
+                            <div class="featured-content">
+                                <a href="#">Thời Trang Công Sở Hiện Đại</a>
+                                <div class="featured-meta">
+                                    <i class="far fa-calendar-alt"></i> 08/12/2023
+                                    <span class="featured-views"><i class="fas fa-eye"></i> 642</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="featured-item">
+                            <div class="item-number">5</div>
+                            <div class="featured-content">
+                                <a href="#">Phụ Kiện Thời Trang 2024</a>
+                                <div class="featured-meta">
+                                    <i class="far fa-calendar-alt"></i> 05/12/2023
+                                    <span class="featured-views"><i class="fas fa-eye"></i> 523</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+            
+            <!-- Main Content -->
+            <main class="content">
+                <!-- Articles -->
+                <div class="articles-list">
+                    <!-- Article 1 -->
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div>
+                                <h2 class="article-title">Cách phối đồ hè nam</h2>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-user"></i> Cafein Team</span>
+                                    <span><i class="far fa-calendar"></i> Ngày 27/05/2022</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="article-text">
+                                <p>1. Sơ mi hoa tiết + quần denim + giày sneaker. Hãy tranh thủ những ngày hè để tạo nên những phối đồ năng động, cá tính với sơ mi hoa tiết kết hợp cùng quần denim và giày sneaker. Đây là set đồ đơn giản nhưng không bao giờ lỗi mốt.</p>
+                                <a href="#" class="read-more">Xem thêm <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        </div>
+                    </article>
+                    
+                    <!-- Article 2 -->
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div>
+                                <h2 class="article-title">Cách phối đồ với quần thể thao nam</h2>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-user"></i> Cafein Team</span>
+                                    <span><i class="far fa-calendar"></i> Ngày 27/05/2022</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="article-text">
+                                <p>1. Quần jogger thể thao phối với áo khoác da. Nếu bạn nghĩ rằng áo khoác da chỉ có thể phối với quần jeans thì bạn đã nhầm. Áo khoác da kết hợp với quần jogger thể thao tạo nên một phong cách vừa thể thao vừa cá tính, phù hợp cho nhiều dịp.</p>
+                                <a href="#" class="read-more">Xem thêm <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        </div>
+                    </article>
+                    
+                    <!-- Article 3 -->
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div>
+                                <h2 class="article-title">Cách phối đồ sơ mi nam</h2>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-user"></i> Cafein Team</span>
+                                    <span><i class="far fa-calendar"></i> Ngày 27/05/2022</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="article-text">
+                                <p>1. Quần jean ôm đứng. Cách phối đồ với áo sơ mi nam đầu tiên mà Cafein gợi ý cho các chàng trai chính là quần jean ôm đứng. Đây là item cơ bản nhất trong tủ đồ nam giới, dễ dàng phối với nhiều kiểu áo sơ mi khác nhau.</p>
+                                <a href="#" class="read-more">Xem thêm <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1593032465175-481ac3daa7d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        </div>
+                    </article>
+                    
+                    <!-- Article 4 -->
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div>
+                                <h2 class="article-title">Cách phối đồ cho bé</h2>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-user"></i> Cafein Team</span>
+                                    <span><i class="far fa-calendar"></i> Ngày 27/05/2022</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="article-text">
+                                <p>1. Áo phông tay dài + chân váy xanh da trời bắt trend. Tông màu xanh than hiện đang là xu hướng được nhiều mẹ lựa chọn cho các bé gái. Kết hợp áo phông tay dài cùng chân váy xanh da trời tạo nên vẻ ngoài đáng yêu, năng động.</p>
+                                <a href="#" class="read-more">Xem thêm <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        </div>
+                    </article>
+                    
+                    <!-- Article 5 -->
+                    <article class="article-card">
+                        <div class="article-header">
+                            <div>
+                                <h2 class="article-title">Mẹo chọn đồ giúp nàng cao và gầy trở nên đầy đặn hơn</h2>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-user"></i> Cafein Team</span>
+                                    <span><i class="far fa-calendar"></i> Ngày 27/05/2022</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="article-text">
+                                <p>1. Chọn những mẫu áo phông oversize. Bất cứ cô nàng nào cũng nên sở hữu ít nhất một chiếc áo phông oversize trong tủ đồ. Với chất liệu mềm mại và form rộng, áo phông oversize giúp che đi khuyết điểm cơ thể và tạo cảm giác đầy đặn hơn.</p>
+                                <a href="#" class="read-more">Xem thêm <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="newsletter-title">NHẬP THÔNG TIN KHUYẾN MÃI TỪ CHÚNG TÔI</h2>
+            <p class="newsletter-desc">Đăng ký ngay để nhận thông tin khuyến mãi mới nhất và ưu đãi đặc biệt từ Alena Fashion</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Nhập email của bạn">
+                <button type="submit" class="newsletter-btn">ĐĂNG KÝ</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-title">Alena</div>
+                    <div class="footer-subtitle">Shop Thời trang và phụ kiện Alena</div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, TP Hà Nội</p>
+                        <p><i class="far fa-clock"></i> Giờ làm việc: Từ 9:00 đến 22:00 các ngày trong tuần từ Thứ 2 đến Chủ nhật</p>
+                        <p><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="footer-title">Về chúng tôi</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Thời trang Nam</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Bé trai</a></li>
+                        <li><a href="#">Bé gái</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="footer-title">Hỗ trợ khách hàng</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Thời trang Nam</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Bé trai</a></li>
+                        <li><a href="#">Bé gái</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="footer-title">Dịch vụ</div>
+                    <ul class="footer-links">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Thời trang Nam</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Bé trai</a></li>
+                        <li><a href="#">Bé gái</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Alena Fashion. Tất cả các quyền được bảo lưu.</p>
+                <p style="margin-top: 10px;">Website: https://template-alena.mysapo.net/#</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Cập nhật số lượng giỏ hàng
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById('cartCount');
+        
+        function updateCartCount() {
+            cartCountElement.textContent = cart.length;
+        }
+        
+        updateCartCount();
+        
+        // Xử lý đăng ký newsletter
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            
+            if (email) {
+                alert(`Cảm ơn bạn đã đăng ký nhận khuyến mãi với email: ${email}`);
+                this.querySelector('.newsletter-input').value = '';
+            } else {
+                alert('Vui lòng nhập email của bạn!');
+            }
+        });
+    </script>
+</body>
+</html>

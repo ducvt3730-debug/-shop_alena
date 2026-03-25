@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Alena Fashion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background-color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        /* Header */
+        .top-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .container {
+            width: 1200px;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #d32f2f;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            padding: 10px 15px;
+            width: 400px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .cart-icon:hover {
+            color: #d32f2f;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #d32f2f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .user-actions a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .hotline {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* Main Navigation */
+        .main-nav {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            position: relative;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .nav-menu > li > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 0;
+            display: block;
+        }
+        
+        .nav-menu > li > a:hover {
+            color: #d32f2f;
+        }
+        
+        /* Login Section */
+        .login-section {
+            padding: 50px 0;
+            min-height: 60vh;
+            background: #f9f9f9;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .login-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #d32f2f;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .form-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .form-button:hover {
+            background-color: #b71c1c;
+        }
+        
+        .social-login {
+            margin: 20px 0;
+        }
+        
+        .social-button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-button:hover {
+            background: #f5f5f5;
+        }
+        
+        .facebook-btn {
+            color: #1877f2;
+            border-color: #1877f2;
+        }
+        
+        .google-btn {
+            color: #db4437;
+            border-color: #db4437;
+        }
+        
+        .form-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .form-links a {
+            color: #d32f2f;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .form-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .newsletter-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .newsletter-desc {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 15px;
+        }
+        
+        .newsletter-btn {
+            padding: 0 30px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .footer-subtitle {
+            font-size: 16px;
+            color: #bbb;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info {
+            color: #bbb;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #d32f2f;
+            width: 16px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: #d32f2f;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .user-actions {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                padding: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="Trangchu.html" class="logo">AL<span>ENA</span></a>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm sản phẩm bạn mong muốn">
+                </div>
+                <div class="user-actions">
+                    <a href="register.html">Đăng ký</a>
+                    <a href="cart.html" class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="hotline"><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li><a href="Trangchu.html">Trang chủ</a></li>
+                <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                <li><a href="chitietsp.html">Sản phẩm</a></li>
+                <li><a href="chitietsp.html">Bé trai</a></li>
+                <li><a href="chitietsp.html">Bé gái</a></li>
+                <li><a href="newsletter.html">Tin tức</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <div class="login-container">
+                <h1 class="login-title">Đăng nhập</h1>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="Nhập email của bạn" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <div class="password-container">
+                            <input type="password" id="password" class="form-input" placeholder="Nhập mật khẩu" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="form-button">
+                        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                    </button>
+                </form>
+                
+                <div class="social-login">
+                    <button class="social-button facebook-btn" id="facebookLogin">
+                        <i class="fab fa-facebook-f"></i> Đăng nhập bằng Facebook
+                    </button>
+                    <button class="social-button google-btn" id="googleLogin">
+                        <i class="fab fa-google"></i> Đăng nhập bằng Google
+                    </button>
+                </div>
+                
+                <div class="form-links">
+                    <a href="#" id="forgotPassword">Quên mật khẩu?</a> | 
+                    <a href="register.html">Chưa có tài khoản? Đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="newsletter-title">NHẬP THÔNG TIN KHUYẾN MÃI TỪ CHÚNG TÔI</h2>
+            <p class="newsletter-desc">Đăng ký ngay để nhận thông tin khuyến mãi mới nhất và ưu đãi đặc biệt từ Alena Fashion</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Nhập email của bạn">
+                <button type="submit" class="newsletter-btn">ĐĂNG KÝ</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-title">Alena</div>
+                    <div class="footer-subtitle">Shop Thời trang và phụ kiện Alena</div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, TP Hà Nội</p>
+                        <p><i class="far fa-clock"></i> Giờ làm việc: Từ 9:00 đến 22:00 các ngày trong tuần từ Thứ 2 đến Chủ nhật</p>
+                        <p><i class="fas fa-phone-alt"></i> Hotline: 1900 6750</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="footer-title">Về chúng tôi</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Hỗ trợ khách hàng</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Dịch vụ</div>
+                    <ul class="footer-links">
+                        <li><a href="Trangchu.html">Trang chủ</a></li>
+                        <li><a href="chitietsp.html">Thời trang Nam</a></li>
+                        <li><a href="chitietsp.html">Sản phẩm</a></li>
+                        <li><a href="chitietsp.html">Bé trai</a></li>
+                        <li><a href="chitietsp.html">Bé gái</a></li>
+                        <li><a href="newsletter.html">Tin tức</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Alena Fashion. Tất cả các quyền được bảo lưu.</p>
+                <p style="margin-top: 10px;">Website: https://template-alena.net/#</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cập nhật số lượng giỏ hàng
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        document.getElementById('cartCount').textContent = cart.length;
+        
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+        
+        // Handle login form
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                alert(`Đăng nhập thành công với email: ${email}`);
+                // Redirect to home page
+                window.location.href = 'Trangchu.html';
+            }
+        });
+        
+        // Social login handlers
+        document.getElementById('facebookLogin').addEventListener('click', function() {
+            alert('Đang kết nối với Facebook...');
+        });
+        
+        document.getElementById('googleLogin').addEventListener('click', function() {
+            alert('Đang kết nối với Google...');
+        });
+        
+        // Forgot password
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt("Nhập email để đặt lại mật khẩu:");
+            if (email) {
+                alert(`Đã gửi liên kết đặt lại mật khẩu đến ${email}`);
+            }
+        });
+        
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            if (email) {
+                alert(`Cảm ơn bạn đã đăng ký nhận khuyến mãi với email: ${email}`);
+                this.querySelector('.newsletter-input').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
